@@ -11,13 +11,12 @@ local global_opts = nil
 
 ---@diagnostic disable-next-line: unused-local
 local get_image_data_sync = function(buf_path, width, height, opts, callback)
-  local command = { "chafa", buf_path, "--size", width .. "x" .. height, "--format", "symbols" }
+  local command = { "chafa", buf_path, "--size", width .. "x" .. height, "--format", "symbols", "--polite", "on" }
 
   vim.fn.jobstart(command, {
     stdout_buffered = true,
     on_stdout = function(_, data)
       if data then
-        table.remove(data)
         callback(data)
       end
     end,
