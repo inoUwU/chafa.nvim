@@ -24,22 +24,9 @@ local get_image_width_height = function(file_path)
     if file then
       local content = file:read("*a")
       file:close()
-      
-      -- Try to extract numeric values from width/height attributes
-      local w_str = content:match('width="([%d%.]+)')
-      local h_str = content:match('height="([%d%.]+)')
-      
-      -- Fallback to viewBox if width/height not found
-      if not (w_str and h_str) then
-        local viewbox = content:match('viewBox="[%d%s%-%.]*%s+([%d%.]+)%s+([%d%.]+)"')
-        if viewbox then
-          w_str, h_str = viewbox:match('([%d%.]+)%s+([%d%.]+)')
-        end
-      end
-      
+      local w_str, h_str = content:match('width="(%d+)"'), content:match('height="(%d+)"')
       if w_str and h_str then
-        return math.floor(tonumber(w_str) or 0),
-               math.floor(tonumber(h_str) or 0)
+        return tonumber(w_str), tonumber(h_str)
       end
     end
   end
