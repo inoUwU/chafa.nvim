@@ -23,6 +23,10 @@ use {
 }
 ```
 
+### Using My Version
+
+To use my version, replace `"princejoogie/chafa.nvim"` with `"inoUwU/chafa.nvim"` in the installation configuration above.
+
 ## Setup
 
 ```lua
