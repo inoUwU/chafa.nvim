@@ -8,6 +8,7 @@ M.SUPPORTED_FILE_PATTERNS = {
   "*.webp",
   "*.tiff",
   "*.tif",
+  "*.svg",
 }
 
 M.BUFFER_OPTIONS_BEFORE = {}

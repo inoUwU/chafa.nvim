@@ -18,13 +18,22 @@ local M = {}
 	(*) = experimental
 ]]
 
-local get_image_width_height = function(file)
-  local fileinfo = type(file)
-  if type(file) == "string" then
-    file = assert(io.open(file, "rb"))
-  else
-    fileinfo = file:seek("cur")
+local get_image_width_height = function(file_path)
+  if file_path:match("%.svg$") then
+    local file = io.open(file_path, "r")
+    if file then
+      local content = file:read("*a")
+      file:close()
+      local w_str, h_str = content:match('width="(%d+)"'), content:match('height="(%d+)"')
+      if w_str and h_str then
+        return tonumber(w_str), tonumber(h_str)
+      end
+    end
   end
+
+  local file = assert(io.open(file_path, "rb"))
+  local fileinfo = file:seek("cur")
+
   local function refresh()
     if type(fileinfo) == "number" then
       file:seek("set", fileinfo)
