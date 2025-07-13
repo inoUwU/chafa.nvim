@@ -64,7 +64,7 @@ function M.setup(user_opts)
   end
 
   vim.api.nvim_create_autocmd(autocmds, {
-    group = vim.api.nvim_create_augroup("ImageOpen", { clear = false }),
+    group = vim.api.nvim_create_augroup("ImageOpen", { clear = true }),
     pattern = config.SUPPORTED_FILE_PATTERNS,
     callback = function()
       async.run(function()
